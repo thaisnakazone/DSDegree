@@ -102,8 +102,8 @@ class ClassificaPerfil:
     @staticmethod
     def __repr__():
         '''
-        Este método mágico e estático não recebe nenhum argumento, pois o dicionário (que deve mostrar os perfis classificados) 
-        foi criado como um atributo estático da classe "ClassificaPerfil".
+        Este método não recebe nenhum argumento, pois o dicionário (que deve mostrar os perfis classificados) foi criado 
+        como um atributo estático da classe "ClassificaPerfil".
         Por fim, retorna-se uma string, contendo a representação do dicionário com os 30 perfis classificados.
         '''
         return str(ClassificaPerfil.dicio_perfil_classificado)
