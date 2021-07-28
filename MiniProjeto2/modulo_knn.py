@@ -35,14 +35,12 @@ class ClassificaPerfil:
         E depois, retorna uma lista com 120 distâncias, ordenadas da mais próxima à mais distante,
         que foram obtidas comparando-se uma carteira não treinada com as outras 120 já treinadas.
         '''
-        enum_data = list(enumerate(self.data))
-        enum_no_class = list(enumerate(self.no_class))
         i = 0
         lista_dist = []
         lista_perf_data = []
-        for tupla in enum_data:
-            lista_subtrai = list(zip(enum_no_class[self.ind_no_class][1][2], enum_data[i][1][2]))
-            lista_perf_data.append(enum_data[i][1][1])
+        for tupla in self.data:
+            lista_subtrai = list(zip(self.no_class[self.ind_no_class][2], self.data[i][2]))
+            lista_perf_data.append(self.data[i][1])
             for indice in range(len(lista_subtrai)):
                 lista_subtrai[indice] = (lista_subtrai[indice][1] - lista_subtrai[indice][0]) ** 2
             distancia = (sum(lista_subtrai) ** 0.5)
@@ -88,22 +86,21 @@ class ClassificaPerfil:
         - o valor de k (que define a quantidade de vizinhos a ser utilizada para classificar um perfil);
         - o índice que identifica cada elemento da lista com os 30 clientes a serem classificados;
         - o retorno do método anterior (dicionário com a frequência do perfil dos 5 clientes com as distâncias mais próximas).
-        Esse método busca (no dicionário do método anterior) o perfil que obteve uma frequência maior do que 50% do valor de k 
+        Esse método busca (no dicionário do método anterior) o perfil que obteve uma frequência maior do que a metade do valor de k 
         (ou seja, o perfil que obteve a maior frequência na lista dos 5 clientes com as distâncias mais próximas) e, então, 
         classifica o cliente com uma carteira não treinada, armazenando essas informações em um dicionário.
         Depois, retorna-se esse dicionário, em que a chave é o CPF do cliente e o valor é o perfil classificado.
         '''
-        enum_no_class = list(enumerate(self.no_class))
         for chave, valor in self.dicio_freq_perfil.items():
-            if valor > self.k*0.5:
-                ClassificaPerfil.dicio_perfil_classificado[enum_no_class[self.ind_no_class][1][0]] = chave
+            if valor > (self.k / 2):
+                ClassificaPerfil.dicio_perfil_classificado[self.no_class[self.ind_no_class][0]] = chave
         return ClassificaPerfil.dicio_perfil_classificado
-            
+    
     @staticmethod
-    def __repr__():
+    def mostra_classificacao():
         '''
-        Este método mágico e estático não recebe nenhum argumento, pois o dicionário (que deve mostrar os perfis classificados) 
+        Este método estático não recebe nenhum argumento, pois o dicionário (que deve mostrar os perfis classificados) 
         foi criado como um atributo estático da classe "ClassificaPerfil".
-        Por fim, retorna-se uma string, contendo a representação do dicionário com os 30 perfis classificados.
+        Por fim, retorna-se o dicionário com os 30 perfis classificados.
         '''
-        return str(ClassificaPerfil.dicio_perfil_classificado)
+        return ClassificaPerfil.dicio_perfil_classificado
