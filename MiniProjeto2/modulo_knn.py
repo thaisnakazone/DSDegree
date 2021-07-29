@@ -35,19 +35,17 @@ class ClassificaPerfil:
         E depois, retorna uma lista com 120 distâncias, ordenadas da mais próxima à mais distante,
         que foram obtidas comparando-se uma carteira não treinada com as outras 120 já treinadas.
         '''
-        i = 0
         lista_dist = []
         lista_perf_data = []
-        for tupla in self.data:
-            lista_subtrai = list(zip(self.no_class[self.ind_no_class][2], self.data[i][2]))
-            lista_perf_data.append(self.data[i][1])
+        for ind_data in range(len(self.data)):
+            lista_subtrai = list(zip(self.no_class[self.ind_no_class][2], self.data[ind_data][2]))
+            lista_perf_data.append(self.data[ind_data][1])
             for indice in range(len(lista_subtrai)):
                 lista_subtrai[indice] = (lista_subtrai[indice][1] - lista_subtrai[indice][0]) ** 2
             distancia = (sum(lista_subtrai) ** 0.5)
             lista_dist.append(distancia)
             lista_dist_perf = list(zip(lista_dist, lista_perf_data))
             self.lista_dist_ord = sorted(lista_dist_perf)
-            i += 1
         return self.lista_dist_ord
 
     def freq_perfil_menores_dist(self):
