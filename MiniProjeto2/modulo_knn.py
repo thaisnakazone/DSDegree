@@ -11,7 +11,7 @@ class ClassificaPerfil:
         '''
         A classe "ClassificaPerfil" recebe os seguintes atributos:
         - data (uma lista com 120 clientes cujas carteiras já foram treinadas);
-        - no_class (uma lista com 30 clientes a serem classificados, de acordo com sua carteira ainda não treinada);
+        - no_class (uma lista com 30 clientes a serem classificados, de acordo com suas carteiras ainda não treinadas);
         - k (valor que define a quantidade de vizinhos a ser utilizada para classificar um perfil);
         - ind_no_class (índice que identifica cada elemento da lista com os 30 clientes a serem classificados).
         Além desses atributos, criou-se:
