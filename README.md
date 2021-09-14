@@ -1,5 +1,5 @@
 # DSDegree
 Aulas do curso de Data Science Degree (Empiricus e Let's Code)
 
-Módulo 1 - Lógica de Programação   
-Módulo 2 - Bibliotecas e API's
+Módulo I - Lógica de Programação   
+Módulo II - Bibliotecas e API's
