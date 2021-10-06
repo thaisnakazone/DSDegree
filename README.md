@@ -3,8 +3,8 @@ Curso: Data Science Degree (Empiricus e Let's Code)
 
 Módulo I - Lógica de Programação   
 Módulo II - Bibliotecas e APIs   
-Módulo III - Banco de Dados (cursando)   
-Módulo IV - Estatística   
+Módulo III - Banco de Dados
+Módulo IV - Estatística (cursando)   
 Módulo V - Machine Learning   
 Módulo VI - Finanças   
 Módulo VII - Big Data   
