@@ -1,16 +1,15 @@
 /*
 PROJETO - MÓDULO BANCO DE DADOS
-BANCO DE DADOS - LETS CODE
+BANCO DE DADOS - LET'S CODE
 
-Neste projeto, vamos desenvolver as tabelas
-para um banco de dados da Lets Code onde teremos 
-tabelas sobre as turmas, alunos e notas e frequências.
-Resolva os exercícios abaixo conforme as instruções
+Neste projeto, vamos desenvolver as tabelas para um banco de dados da Let's Code.
+Essas tabelas devem conter dados sobre alunos, turmas, notas e frequências.
+Resolva os exercícios abaixo, conforme as instruções.
 */
 
 /*
-EXERCICIO 1
-Crie 3 tabelas para este banco de dados, sendo elas:
+EXERCÍCIO 1
+Crie 3 tabelas para esse banco de dados, sendo elas:
 
 - alunos
 Variáveis:
@@ -41,8 +40,10 @@ Variáveis:
 	- nps_prof
 */
 
+-- Excluindo a tabela "alunos", caso ela já exista no banco de dados
 DROP TABLE IF EXISTS alunos;
 
+-- Criando a tabela "alunos"
 CREATE TABLE alunos(
 	aluno_id    SERIAL PRIMARY KEY,
 	nome_aluno  VARCHAR(255) NOT NULL,
@@ -51,8 +52,10 @@ CREATE TABLE alunos(
 	mensalidade NUMERIC(8,2)
 );
 
+-- Excluindo a tabela "turmas", caso ela já exista no banco de dados
 DROP TABLE IF EXISTS turmas;
 
+-- Criando a tabela "turmas"
 CREATE TABLE turmas(
 	turma_id       SERIAL PRIMARY KEY,
 	nome_turma     VARCHAR(255) NOT NULL,
@@ -62,8 +65,10 @@ CREATE TABLE turmas(
 	dias_semana    VARCHAR(255)
 );
 
+-- Excluindo a tabela "notas_freq", caso ela já exista no banco de dados
 DROP TABLE IF EXISTS notas_freq;
 
+-- Criando a tabela "notas_freq"
 CREATE TABLE notas_freq(
 	turma_id       SERIAL REFERENCES turmas(turma_id),
 	professor_id   SERIAL NOT NULL,
@@ -75,15 +80,17 @@ CREATE TABLE notas_freq(
 	nps_prof       INT
 );
 
+-- Verificando as tabelas criadas
 SELECT * FROM alunos;
 SELECT * FROM turmas;
 SELECT * FROM notas_freq;
 
 /*
-EXERCICIO 2
-Preencha as tabelas com os seguintes dados:
+EXERCÍCIO 2
+Preencha os dados nas tabelas.
 */
 
+-- Inserindo os dados na tabela "alunos"
 INSERT INTO alunos (aluno_id, nome_aluno, idade, bolsista, mensalidade)
 VALUES
 	(0001, 'João Paulo', 20, 'Não', 600),
@@ -131,8 +138,10 @@ VALUES
 	(0043, 'Ana Maria', 26, 'Sim', 0),
 	(0044, 'Julio Pieri', 20, 'Não', 600);
 
+-- Verificando a tabela "alunos"
 SELECT * FROM alunos;
 
+-- Inserindo os dados na tabela "turmas"
 INSERT INTO turmas (turma_id, nome_turma, professor_id, nome_professor, carga_horaria, dias_semana)
 VALUES
 	(0001, 'Python',         0001, 'Cleber Silva',   80,  'Segunda | Quarta'),
@@ -143,8 +152,10 @@ VALUES
 	(0006, 'Banco de Dados', 0003, 'Anderson Sousa', 60,  'Terça | Quinta'),
 	(0007, 'Data Science',   0002, 'Pedro Henrique', 120, 'Sábado');
 
+-- Verificando a tabela "turmas"
 SELECT * FROM turmas;
 
+-- Inserindo os dados na tabela "notas_freq"
 INSERT INTO notas_freq(turma_id, professor_id, aluno_id, frequencia, nota_projeto1, nota_projeto2, nota_prova, nps_prof)
 VALUES
 	(0001, 0001, 0001, 90, 8, 10, 7, NULL),
@@ -198,14 +209,14 @@ VALUES
 	(0007, 0002, 0042, 80, 9, 8.5, 9, 80),
 	(0007, 0002, 0043, 80, 8.5, 9, 9, 86),
 	(0007, 0002, 0044, 80, 9, 9.5, 10, 94);
-	
+
+-- Verificando a tabela "notas_freq"
 SELECT * FROM notas_freq;
 
 /*
-EXERCICIO 3
+EXERCÍCIO 3
 
-Calcule a média do NPS dos professores (arredondado para duas casas),
-ignorando as notas nulas e ordenando da maior média para a menor;
+Calcule a média do NPS dos professores (arredondando para duas casas decimais), ignorando as notas nulas e ordenando da maior média para a menor.
 */
 
 -- As notas nulas já são ignoradas ao fazer o cálculo
@@ -231,9 +242,8 @@ GROUP BY 1
 ORDER BY 2 DESC;
 
 /*
-EXERCICIO 4
-Calcule a média final de cada um dos alunos de cada turma, sendo a média
-calculada da seguinte forma: 0.3 * projeto1 + 0.3 * projeto2 + 0.4 * prova
+EXERCÍCIO 4
+Calcule a média final de cada aluno, em cada turma, sendo a média calculada da seguinte forma: 0.3 * projeto1 + 0.3 * projeto2 + 0.4 * prova.
 */
 
 SELECT
@@ -247,10 +257,9 @@ LEFT JOIN notas_freq AS B ON A.aluno_id = B.aluno_id
 RIGHT JOIN turmas AS C ON B.turma_id = C.turma_id;
 
 /*
-EXERCICIO 5
-Conte a quantidade de alunos que seriam reprovados por turma, sendo o criterio de reprovação
-que a nota final (calculada no exercício anterior) seja menor 7 ou que a frequencia seja menor
-que 70%. Ordene da turma com mais reprovados para a com menos
+EXERCÍCIO 5
+Conte a quantidade de alunos que seriam reprovados por turma, com base no seguinte critério de reprovação: nota final (calculada no exercício anterior) menor do que 7 ou a frequência menor do que 70%.
+Ordene da turma com mais reprovados para a com menos.
 */
 
 -- Criando uma View temporária para visualizar a nota final e frequência de cada aluno
@@ -317,11 +326,11 @@ FROM view_media_freq
 WHERE frequencia < 80 OR nota_final < 8;
 
 /*
-EXERCICIO 6
-Conte a quantidade de bolsista matriculados por turma
+EXERCÍCIO 6
+Conte a quantidade de bolsistas matriculados por turma.
 */
 
--- Criando uma View temporária para visualizar todos os bolsistas em cada turma
+-- Criando uma View temporária para visualizar os bolsistas em cada turma
 CREATE OR REPLACE TEMP VIEW view_bolsistas AS
 SELECT
 	A.turma_id,
@@ -346,8 +355,8 @@ FROM view_bolsistas
 GROUP BY 1, 2;
 
 /*
-EXERCICIO 7
-Calcule a média de idade por turma (arredonda para 1 casa) e também a maior idade por turma
+EXERCÍCIO 7
+Calcule a média de idade por turma (arredondando para 1 casa decimal) e a maior idade por turma.
 */
 
 -- Criando uma View temporária para visualizar a idade dos alunos em cada turma
@@ -376,10 +385,9 @@ GROUP BY 1, 2
 ORDER BY 1;
 	
 /*
-EXERCICIO 8
-Calcule o total faturado por turma, sendo o total faturado o valor
-da mensalidade paga pelos alunos, Faça esse calculo agrupado por
-turma_id e nome_turma
+EXERCÍCIO 8
+Calcule o total faturado por turma, que seria o valor da mensalidade paga pelos alunos.
+Faça esse cálculo agrupado por turma_id e nome_turma.
 */
 
 -- Criando uma View temporária para visualizar as mensalidades pagas por aluno em cada turma
@@ -407,15 +415,14 @@ GROUP BY 1, 2
 ORDER BY 1;
 
 /*
-EXERCICIO 9
-Calcule quanto cada um dos professores receberam por turma.
-O salário do professor é 5% do total das mensalidades * carga horário do curso
+EXERCÍCIO 9
+Calcule quanto cada um dos professores recebeu por turma.
+O salário do professor é: 5% do total das mensalidades * carga horário do curso.
 
-Dica: Você irá utilizar algo como AVG(carga_horaria) * SUM(0.05 * mensalidade)
+Dica: Você irá utilizar algo como: AVG(carga_horaria) * SUM(0.05 * mensalidade).
 */
 
--- Criando uma View temporária para visualizar:
--- turmas, professores, cargas horárias, alunos e mensalidades
+-- Criando uma View temporária para visualizar: turmas, professores, cargas horárias, alunos e mensalidades
 CREATE OR REPLACE TEMP VIEW view_prof_mensal AS
 SELECT
 	A.turma_id,
@@ -443,10 +450,8 @@ GROUP BY 1, 2, 3
 ORDER BY 1;
 
 /*
-EXERCICIO 10
-Utilizando a variável dias_semana, que representa os dias que aconteciam as aulas,
-calcule a quantidade de alunos por dias_semana ordenando da maior para a menor 
-quantidade;
+EXERCÍCIO 10
+Utilizando a variável dias_semana, que representa os dias em que aconteciam as aulas, calcule a quantidade de alunos por dias_semana, ordenando da maior para a menor quantidade.
 */
 
 -- Criando uma View temporária para visualizar os alunos em "dias_semana"
