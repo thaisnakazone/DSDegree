@@ -1,5 +1,5 @@
-# DSDegree
-Curso: Data Science Degree (Empiricus e Let's Code)
+# Data Science Degree
+Curso: DS Degree (Empiricus e Let's Code)
 
 Módulo I - Lógica de Programação   
 Módulo II - Bibliotecas e APIs   
