@@ -5,7 +5,7 @@ Módulo I - Lógica de Programação
 Módulo II - Bibliotecas e APIs   
 Módulo III - Banco de Dados   
 Módulo IV - Estatística   
-Módulo V - Machine Learning (cursando)
+Módulo V - Machine Learning (cursando)   
 Módulo VI - Finanças   
 Módulo VII - Big Data   
 Módulo VIII - Modelos Produtivos   
