@@ -9,5 +9,5 @@ Módulo V - Machine Learning
 Módulo VI - Finanças   
 Módulo VII - Modelos Produtivos   
 Módulo VIII - Big Data   
-Módulo IX - Soft Skills (cursando)   
+Módulo IX - Soft Skills   
 Próxima etapa: trabalhando como cientista de dados em uma ótima empresa! =D
